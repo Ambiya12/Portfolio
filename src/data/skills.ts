@@ -7,11 +7,11 @@ export const skillGroups: SkillGroup[] = [
   {
     title: 'Frontend',
     items: [
-      'ReactJS',
-      'NextJS',
+      'React',
+      'Next.js',
       'TypeScript',
-      'Responsive UI Development',
-      'Clean Architecture Principles',
+      'Responsive Interface Development',
+      'Component Architecture',
       'Figma (UI Prototyping)',
     ],
   },
@@ -19,9 +19,9 @@ export const skillGroups: SkillGroup[] = [
     title: 'Backend',
     items: [
       'Node.js (Fastify)',
-      'Node.js (Express.js)',
+      'Node.js (Express)',
       'BFF Architecture',
-      'REST API Development',
+      'REST API Design',
       'Service Integrations',
       'PHP',
       'SQL Database Management',
@@ -42,7 +42,7 @@ export const skillGroups: SkillGroup[] = [
   {
     title: 'Management & Tools',
     items: [
-      'Agile Methodologies',
+      'Agile Delivery',
       'Jira',
       'Confluence',
       'Microsoft Teams',

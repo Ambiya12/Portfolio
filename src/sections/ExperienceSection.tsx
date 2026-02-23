@@ -20,13 +20,14 @@ export function ExperienceSection() {
 
   return (
     <section id="experience" className="fun-section fun-bg-lemon">
-      <span className="fun-shape fun-shape--bottom" aria-hidden="true" />
       <div className="container">
         <SectionHeader
           eyebrow="Experience"
-          titleStart="Professional"
+          issueTag="02"
+          titleStart="Delivery"
           titleAccent="Record"
-          subtitle="Delivery, collaboration, and engineering discipline across recent roles."
+          titleEnd="."
+          subtitle="Recent professional work across product delivery, full-stack implementation, and engineering collaboration."
         />
 
         <motion.div

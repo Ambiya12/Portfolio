@@ -1,16 +1,16 @@
 const WORDS = [
+  'Design',
   'Build',
-  'Learn',
-  'Ship',
-  'Iterate',
+  'Deliver',
   'Collaborate',
+  'Measure',
   'Improve',
-  'Architect',
-  'Deploy',
-  'Refactor',
-  'Review',
-  'Test',
   'Document',
+  'Ship',
+  'Scale',
+  'Review',
+  'Learn',
+  'Repeat',
 ]
 
 export function Marquee() {

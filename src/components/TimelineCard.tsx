@@ -28,20 +28,17 @@ export function TimelineCard({
 }: TimelineCardProps) {
   return (
     <motion.article className="exp-card" variants={fadeInUp}>
-      {/* Timeline dot */}
       <div className="exp-dot-col">
-        <span className={`exp-dot${isCurrent ? ' exp-dot--active' : ''}`} />
-        <span className="exp-line" />
+        <div className={`exp-dot ${isCurrent ? 'exp-dot--active' : ''}`} />
+        <div className="exp-line" />
       </div>
 
       <div className="exp-card-inner">
-        {/* Period + status */}
         <div className="exp-meta-row">
           <span className="exp-period">{period}</span>
           {isCurrent && <span className="exp-badge-current">Current</span>}
         </div>
 
-        {/* Role + logo */}
         <div className="exp-header">
           <div className="exp-header-text">
             <h3 className="exp-role">{title}</h3>
@@ -62,7 +59,6 @@ export function TimelineCard({
           )}
         </div>
 
-        {/* Location */}
         {location && (
           <p className="exp-location">
             <svg
@@ -83,16 +79,17 @@ export function TimelineCard({
           </p>
         )}
 
-        {/* Description */}
         {description && <p className="exp-description">{description}</p>}
 
-        {/* Grouped points */}
         {points.length > 0 && (
           <ul className="exp-points">
             {points.map((p, i) => (
               <li key={i} className="exp-point-item">
-                {p.category && <span className="exp-point-cat">{p.category}</span>}
-                <span className="exp-point-text">{p.content}</span>
+                <span className="exp-point-dash">—</span>
+                <div>
+                  {p.category && <span className="exp-point-cat">{p.category}</span>}
+                  <span className="exp-point-text">{p.content}</span>
+                </div>
               </li>
             ))}
           </ul>

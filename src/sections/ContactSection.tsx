@@ -1,6 +1,6 @@
 import type { FormEvent } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import { fadeInUp } from '../lib/motion'
+import { fadeInUp, staggerContainer } from '../lib/motion'
 import { SectionHeader } from '../components/SectionHeader'
 
 const CONTACT_EMAIL = 'ambiyadms@gmail.com'
@@ -23,41 +23,41 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="fun-section fun-bg-lavender section-last">
-      <span className="fun-shape fun-shape--top" aria-hidden="true" />
       <div className="container contact-layout">
         <motion.div
           className="contact-intro"
-          variants={fadeInUp}
+          variants={staggerContainer}
           initial={reduceMotion ? false : 'hidden'}
           whileInView={reduceMotion ? undefined : 'visible'}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           <SectionHeader
             eyebrow="Contact"
-            titleStart="Start a"
-            titleAccent="Conversation"
+            issueTag="07"
+            titleStart="Let's"
+            titleAccent="Collaborate"
             titleEnd="."
-            subtitle="Open to opportunities where architecture clarity, collaboration, and delivery quality are priorities."
+            subtitle="I’m currently looking for apprenticeship opportunities in software engineering. If your team values ownership and clean execution, I’d love to connect."
           />
 
-          <div className="contact-links">
-            <a href={`mailto:${CONTACT_EMAIL}`} className="fun-button">Email</a>
+          <motion.div className="contact-links" variants={fadeInUp}>
+            <a href={`mailto:${CONTACT_EMAIL}`} className="fun-button">Send Email</a>
             <a href="https://www.linkedin.com/in/galystan" target="_blank" rel="noreferrer" className="fun-button fun-button-secondary">
               LinkedIn
             </a>
             <a href="https://github.com/Ambiya12" target="_blank" rel="noreferrer" className="fun-button fun-button-secondary">
               GitHub
             </a>
-          </div>
+          </motion.div>
         </motion.div>
 
         <motion.form
-          className="fun-card fun-form"
+          className="fun-card fun-form contact-form-card"
           onSubmit={handleSubmit}
           variants={fadeInUp}
           initial={reduceMotion ? false : 'hidden'}
           whileInView={reduceMotion ? undefined : 'visible'}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ delay: 0.08 }}
         >
           <div>
@@ -72,10 +72,10 @@ export function ContactSection() {
 
           <div>
             <label htmlFor="contact-message" className="form-label">Message</label>
-            <textarea id="contact-message" name="message" rows={5} className="fun-textarea" placeholder="Tell me about your project..." required />
+            <textarea id="contact-message" name="message" rows={5} className="fun-textarea" placeholder="Tell me about the role or project..." required />
           </div>
 
-          <button type="submit" className="fun-button form-submit">
+          <button type="submit" className="fun-button form-submit contact-submit">
             Send Message
           </button>
         </motion.form>

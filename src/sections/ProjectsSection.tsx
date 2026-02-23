@@ -7,19 +7,21 @@ export function ProjectsSection() {
   const reduceMotion = useReducedMotion()
 
   return (
-    <section id="projects" className="fun-section fun-bg-blue">
-      <span className="fun-shape fun-shape--top" aria-hidden="true" />
-      <div className="container">
-        <SectionHeader
-          eyebrow="Projects"
-          titleStart="Built for"
-          titleAccent="real-world"
-          titleEnd="constraints."
-          subtitle="Focused on scalable outcomes and user experience."
-        />
+    <section id="projects" className="fun-section fun-bg-blue projects-scene">
+      <div className="projects-scene-stage">
+        <div className="container projects-scene-heading">
+          <SectionHeader
+            eyebrow="Projects"
+            issueTag="04"
+            titleStart="Projects with"
+            titleAccent="production"
+            titleEnd="thinking."
+            subtitle="Selected builds that emphasize architecture choices, reliability, and user-facing value."
+          />
+        </div>
 
         <motion.div
-          className="fun-grid"
+          className="projects-track"
           variants={staggerContainer}
           initial={reduceMotion ? false : 'hidden'}
           whileInView={reduceMotion ? undefined : 'visible'}
@@ -28,7 +30,7 @@ export function ProjectsSection() {
           {projects.map((project, i) => (
             <motion.article
               key={project.title}
-              className="fun-card project-card"
+              className="fun-card project-card projects-card"
               data-index={String(i + 1).padStart(2, '0')}
               variants={fadeInUp}
             >

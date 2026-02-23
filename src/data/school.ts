@@ -11,13 +11,12 @@ export const schoolHistory: SchoolItem[] = [
     institution: 'HETIC',
     degree: 'Développeur Web, Computer Programming',
     details: [
-      'Focus: Full-Stack Software Engineering with modern architectural patterns.',
-      'Technical expertise: Clean Architecture, Full-Stack System Design, and UI/UX with Figma and Adobe tools.',
-      'Front-end: JavaScript, TypeScript, and React.js.',
-      'Back-end: Node.js, PHP, and SQL database management.',
-      'Advanced: AI performance optimization and advanced authentication.',
-      'Methodology and QA: Agile collaborative workflows, integration testing, and unit testing.',
-      'Specialization: IoT and robotics with hardware-software integration using Python.',
+      'Focus: Full-stack software engineering with emphasis on architecture and delivery quality.',
+      'System design: Applied clean architecture principles to structure scalable web applications.',
+      'Front-end stack: JavaScript, TypeScript, React, and design-to-implementation workflows.',
+      'Back-end stack: Node.js, PHP, SQL modeling, and service-oriented implementation.',
+      'Quality and methods: Agile collaboration, unit testing, and integration testing practices.',
+      'Advanced topics: Authentication, AI-assisted optimization, and IoT-oriented engineering with Python.',
     ],
   },
   {
@@ -25,10 +24,10 @@ export const schoolHistory: SchoolItem[] = [
     institution: '3W Academy',
     degree: 'Développeur Full Stack, Computer Programming',
     details: [
-      'Front-end development: HTML, CSS, JavaScript, and framework usage (React or Angular).',
-      'Back-end development: Node.js and PHP with Express.js framework.',
-      'Databases: SQL and NoSQL (MongoDB).',
-      'CMS: WordPress and PrestaShop.',
+      'Front-end fundamentals: HTML, CSS, JavaScript, and framework-based UI development.',
+      'Back-end fundamentals: Node.js, Express, and PHP for feature implementation.',
+      'Data layer: SQL and NoSQL database fundamentals including MongoDB.',
+      'CMS workflows: WordPress and PrestaShop in practical project contexts.',
     ],
   },
   {
@@ -36,8 +35,8 @@ export const schoolHistory: SchoolItem[] = [
     institution: 'Université Paris Cité',
     degree: "Double Bachelor's Degree, Mathematics and Computer Science",
     details: [
-      'Built strong analytical foundations across mathematics and computer science.',
-      'Strengthened problem-solving and formal reasoning for software engineering.',
+      'Built strong analytical foundations in mathematics and computer science.',
+      'Strengthened formal reasoning and problem-solving for software engineering practice.',
     ],
   },
 ]

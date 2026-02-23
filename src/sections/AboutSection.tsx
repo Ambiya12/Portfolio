@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { fadeInUp } from '../lib/motion'
+import { fadeInUp, staggerContainer } from '../lib/motion'
 import { SectionHeader } from '../components/SectionHeader'
 import nomadPhoto from '../assets/nomad.jpg'
 
@@ -8,7 +8,6 @@ export function AboutSection() {
 
   return (
     <section id="about" className="fun-section fun-bg-mint">
-      <span className="fun-shape fun-shape--top" aria-hidden="true" />
       <div className="container about-layout">
         <motion.div
           className="profile-placeholder fun-card about-media"
@@ -28,23 +27,23 @@ export function AboutSection() {
 
         <motion.div
           className="about-copy"
-          variants={fadeInUp}
+          variants={staggerContainer}
           initial={reduceMotion ? false : 'hidden'}
           whileInView={reduceMotion ? undefined : 'visible'}
           viewport={{ once: true, amount: 0.35 }}
-          transition={{ delay: 0.08 }}
         >
           <SectionHeader
             eyebrow="About"
+            issueTag="01"
             titleStart="Engineering with"
-            titleAccent="clarity and focus"
+            titleAccent="ownership"
             titleEnd="."
-            subtitle="I am passionate about software engineering and I enjoy building systems that remain clean as they scale. I focus on readable code, strong architectural boundaries, and pragmatic delivery."
+            subtitle="I turn product requirements into reliable software outcomes by balancing architecture quality, team communication, and practical delivery speed."
           />
-          <p className="about-note">
-            My mindset is continuous learning: improving technical depth, communicating clearly in Agile teams, and
-            collaborating across product, design, and engineering stakeholders.
-          </p>
+          <motion.p className="about-note" variants={fadeInUp}>
+            I thrive in apprenticeship environments where mentorship and accountability coexist: I document decisions,
+            ask better questions early, and keep implementation aligned with business priorities.
+          </motion.p>
         </motion.div>
       </div>
     </section>

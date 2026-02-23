@@ -8,14 +8,14 @@ export function SkillsSection() {
 
   return (
     <section id="skills" className="fun-section fun-bg-lavender">
-      <span className="fun-shape fun-shape--top" aria-hidden="true" />
       <div className="container">
         <SectionHeader
           eyebrow="Technical Skills"
+          issueTag="05"
           titleStart="Cross-stack"
-          titleAccent="capabilities"
+          titleAccent="toolkit"
           titleEnd="."
-          subtitle="Structured knowledge across frontend, backend, DevOps, and management tooling."
+          subtitle="A practical stack for shipping features end-to-end, from interface quality to deployment reliability."
         />
 
         <motion.div

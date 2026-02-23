@@ -20,40 +20,40 @@ export function SchoolSection() {
 
   return (
     <section id="school" className="fun-section fun-bg-lavender school-section">
-      <span className="fun-shape fun-shape--bottom" aria-hidden="true" />
       <div className="container">
+        <SectionHeader
+          eyebrow="Education"
+          issueTag="03"
+          titleStart="Learning"
+          titleAccent="Trajectory"
+          titleEnd="."
+          subtitle="Formal training that supports practical software engineering work in real teams."
+        />
+
         <motion.div
+          className="exp-timeline"
+          variants={staggerContainer}
           initial={reduceMotion ? false : 'hidden'}
           whileInView={reduceMotion ? undefined : 'visible'}
           viewport={{ once: true, amount: 0.2 }}
-          variants={staggerContainer}
         >
-          <SectionHeader
-            eyebrow="Education"
-            titleStart="Education"
-            titleAccent="Record"
-            subtitle="Formal training in software engineering and web design."
-          />
+          {schoolHistory.map((item) => {
+            const logo = getSchoolLogo(item.institution)
+            const parsed = item.details.map((d) => parseCategoryString(d, 28))
 
-          <motion.div className="exp-timeline" variants={staggerContainer}>
-            {schoolHistory.map((item) => {
-              const logo = getSchoolLogo(item.institution)
-              const parsed = item.details.map((d) => parseCategoryString(d, 28))
-
-              return (
-                <TimelineCard
-                  key={`${item.period}-${item.institution}`}
-                  period={item.period}
-                  title={item.institution}
-                  subtitle={item.degree}
-                  logo={logo}
-                  logoAlt={`${item.institution} logo`}
-                  isSchoolLogo={true}
-                  points={parsed}
-                />
-              )
-            })}
-          </motion.div>
+            return (
+              <TimelineCard
+                key={`${item.period}-${item.institution}`}
+                period={item.period}
+                title={item.institution}
+                subtitle={item.degree}
+                logo={logo}
+                logoAlt={`${item.institution} logo`}
+                isSchoolLogo={true}
+                points={parsed}
+              />
+            )
+          })}
         </motion.div>
       </div>
     </section>

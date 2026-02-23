@@ -11,9 +11,9 @@ export const projects: Project[] = [
   {
     title: 'Nomad Connect',
     description:
-      'Real stories. Real places. Real travelers. A modern travel community platform where authentic travelers share hidden gems, insider tips, and real experiences from around the world.',
+      'A community platform concept for travelers to share reliable local insights, trip stories, and practical recommendations.',
     highlights:
-      'Past full-stack project currently inactive, built with React, TypeScript, Node.js, and Express.js using modern web architecture patterns.',
+      'Delivered as a full-stack build with React, TypeScript, Node.js, and Express, focused on clean structure and scalable feature growth.',
     tags: ['React', 'TypeScript', 'Node.js', 'Express.js', 'Full-stack'],
     githubUrl: 'https://github.com/Ambiya12/NomadConnect.git',
   },
@@ -21,9 +21,9 @@ export const projects: Project[] = [
     title: 'Evo-Botics (RAA)',
     statusLabel: 'Ongoing project',
     description:
-      'Autonomous Assistance Robot developed at HETIC to improve accessibility in public spaces, combining robotics, AI, and real-time monitoring through an accessible interface.',
+      'An autonomous assistance robotics initiative designed to improve accessibility in public environments through real-time software coordination.',
     highlights:
-      'Ongoing full-stack robotics project integrating ROS navigation, computer vision, object manipulation, MQTT/WebSocket communication, and a WCAG-aware React dashboard.',
+      'Combines ROS navigation, computer vision, MQTT/WebSocket communication, and a WCAG-aware React dashboard for monitoring and control.',
     tags: ['ROS', 'React', 'Node.js', 'OpenCV', 'MQTT', 'WebSockets', 'Full-stack'],
     githubUrl: 'https://github.com/Ambiya12/evo-botics-raa.git',
   },
