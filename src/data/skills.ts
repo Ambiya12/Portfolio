@@ -5,49 +5,27 @@ export type SkillGroup = {
 
 export const skillGroups: SkillGroup[] = [
   {
-    title: 'Frontend',
-    items: [
-      'React',
-      'Next.js',
-      'TypeScript',
-      'Responsive Interface Development',
-      'Component Architecture',
-      'Figma (UI Prototyping)',
-    ],
+    title: 'Data Engineering',
+    items: ['Python', 'SQL', 'Pandas', 'Data modelling', 'PostgreSQL', 'MongoDB'],
   },
   {
-    title: 'Backend',
-    items: [
-      'Node.js (Fastify)',
-      'Node.js (Express)',
-      'BFF Architecture',
-      'REST API Design',
-      'Service Integrations',
-      'PHP',
-      'SQL Database Management',
-      'NoSQL (MongoDB)',
-    ],
+    title: 'Data Science',
+    items: ['Exploratory analysis', 'Scikit-learn', 'Plotly', 'Streamlit', 'Jupyter Notebook'],
   },
   {
-    title: 'DevOps',
-    items: [
-      'Docker',
-      'GitLab CI/CD',
-      'OpenShift (Azure Red Hat)',
-      'Harbor',
-      'Argo CD',
-      'SonarQube',
-    ],
+    title: 'Cloud & Industrialisation',
+    items: ['Azure', 'Databricks', 'Docker', 'Kubernetes', 'GitLab CI/CD', 'Argo CD'],
   },
   {
-    title: 'Management & Tools',
-    items: [
-      'Agile Delivery',
-      'Jira',
-      'Confluence',
-      'Microsoft Teams',
-      'Slack',
-      'Notion',
-    ],
+    title: 'Development',
+    items: ['Java Spring Boot', 'Node.js', 'API REST', 'React', 'TypeScript'],
+  },
+  {
+    title: 'Quality & Monitoring',
+    items: ['Pytest', 'Vitest', 'Postman', 'SonarQube', 'Grafana', 'Faro'],
+  },
+  {
+    title: 'Tools',
+    items: ['GitLab', 'Jira', 'Confluence', 'Agile/Scrum'],
   },
 ]

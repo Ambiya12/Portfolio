@@ -36,13 +36,10 @@ export function ProjectsSection() {
             >
               <div className="project-title-row">
                 <h3 className="project-title">{project.title}</h3>
-                {project.statusLabel && (
-                  <span className="project-status">{project.statusLabel}</span>
-                )}
               </div>
               <p className="project-desc">{project.description}</p>
               <p className="project-highlight">
-                {project.highlights}
+                {project.points.join(' ')}
               </p>
 
               <div className="fun-badge-wrap">
@@ -54,9 +51,11 @@ export function ProjectsSection() {
               </div>
 
               <div className="project-actions">
-                <a href={project.githubUrl} target="_blank" rel="noreferrer" className="fun-button fun-button-secondary">
-                  GitHub
-                </a>
+                {project.githubUrl && (
+                  <a href={project.githubUrl} target="_blank" rel="noreferrer" className="fun-button fun-button-secondary">
+                    GitHub
+                  </a>
+                )}
               </div>
             </motion.article>
           ))}
