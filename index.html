@@ -3,9 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#111210" />
     <meta name="description" content="Ambiya Dimas Galystan — Data Engineer / AI Engineer apprentice in Paris, available from September 2026." />
     <title>Ambiya Dimas Galystan — Data Engineer / AI Engineer</title>
+    <script>
+      try {
+        document.documentElement.dataset.theme =
+          localStorage.getItem('portfolio-theme') === 'light' ? 'light' : 'dark'
+      } catch {
+        document.documentElement.dataset.theme = 'dark'
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

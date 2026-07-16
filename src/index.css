@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Libre+Franklin:wght@500;600&display=swap');
 
 :root {
-  --bg: #f5f4ef;
-  --surface: #ebe9e2;
-  --ink: #171815;
-  --muted: #6e7068;
-  --quiet: #96988f;
-  --line: rgba(23, 24, 21, 0.17);
-  --line-strong: rgba(23, 24, 21, 0.42);
-  --accent: #69765a;
+  --bg: #111210;
+  --surface: #1a1c18;
+  --ink: #efeee8;
+  --muted: #a4a79e;
+  --quiet: #72766e;
+  --line: rgba(239, 238, 232, 0.14);
+  --line-strong: rgba(239, 238, 232, 0.38);
+  --accent: #b6c2a2;
   --gutter: clamp(1.25rem, 4vw, 4.75rem);
   --max-width: 94rem;
   --section-space: clamp(6.5rem, 11vw, 11rem);
@@ -18,18 +18,19 @@
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  color-scheme: dark;
 }
 
-:root[data-theme='dark'] {
-  --bg: #111210;
-  --surface: #1a1c18;
-  --ink: #efeee8;
-  --muted: #a4a79e;
-  --quiet: #72766e;
-  --line: rgba(239, 238, 232, 0.14);
-  --line-strong: rgba(239, 238, 232, 0.38);
-  --accent: #b6c2a2;
-  color-scheme: dark;
+:root[data-theme='light'] {
+  --bg: #f5f4ef;
+  --surface: #ebe9e2;
+  --ink: #171815;
+  --muted: #6e7068;
+  --quiet: #96988f;
+  --line: rgba(23, 24, 21, 0.17);
+  --line-strong: rgba(23, 24, 21, 0.42);
+  --accent: #69765a;
+  color-scheme: light;
 }
 
 * {
@@ -94,6 +95,18 @@ button {
   min-height: 100vh;
 }
 
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 30;
+  height: 2px;
+  background: var(--accent);
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+
 main,
 footer {
   width: min(calc(100% - (2 * var(--gutter))), var(--max-width));
@@ -103,7 +116,7 @@ footer {
 .project-links a,
 .contact > a,
 footer a {
-  transition: opacity 160ms ease;
+  transition: opacity 160ms ease, color 160ms ease;
 }
 
 .project-links a:hover,
@@ -117,23 +130,41 @@ footer a:hover {
   top: clamp(1rem, 2vw, 1.5rem);
   right: clamp(1rem, 2vw, 1.5rem);
   z-index: 20;
-  display: grid;
-  width: 1.8rem;
-  height: 1.8rem;
-  padding: 0;
-  place-items: center;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  color: var(--muted);
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  display: inline-flex;
+  width: auto;
+  min-width: 4.7rem;
+  height: 2.15rem;
+  padding: 0 0.72rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.42rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0.35rem 1.4rem rgba(0, 0, 0, 0.12);
   cursor: pointer;
-  font-size: 0.58rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  will-change: transform;
 }
 
 .theme-toggle:hover {
-  border-color: var(--line-strong);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.theme-toggle-icon {
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.theme-toggle-label {
+  line-height: 1;
 }
 
 .theme-toggle:focus-visible,
@@ -195,8 +226,6 @@ a:focus-visible {
   line-height: 1.08;
   letter-spacing: -0.048em;
   text-wrap: balance;
-  opacity: 0;
-  animation: phrase-in 720ms 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .hero-bottom {
@@ -224,6 +253,17 @@ a:focus-visible {
   border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--accent) 14%, transparent);
+  animation: availability-pulse 2.4s ease-out infinite;
+}
+
+@keyframes availability-pulse {
+  0%, 45% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 24%, transparent);
+  }
+
+  75%, 100% {
+    box-shadow: 0 0 0 0.45rem color-mix(in srgb, var(--accent) 0%, transparent);
+  }
 }
 
 @keyframes phrase-in {
@@ -280,6 +320,7 @@ a:focus-visible {
   max-width: 14rem;
   overflow: hidden;
   background: var(--surface);
+  will-change: transform;
 }
 
 .project-media > img,
@@ -366,6 +407,11 @@ a:focus-visible {
   display: inline-block;
   font-size: 0.78em;
   transform: translateY(-0.08em);
+  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+a:hover .arrow {
+  transform: translate(0.18rem, -0.2rem);
 }
 
 .about-grid {
@@ -377,6 +423,7 @@ a:focus-visible {
 
 .portrait {
   max-width: 31rem;
+  will-change: transform;
 }
 
 .portrait img {

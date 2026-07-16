@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion'
 import { experienceTimeline } from './data/experience'
 import { projects, type Project } from './data/projects'
 import { schoolHistory } from './data/school'
@@ -14,16 +15,16 @@ const THEME_STORAGE_KEY = 'portfolio-theme'
 type Theme = 'light' | 'dark'
 
 function getInitialTheme(): Theme {
-  if (typeof window === 'undefined') return 'light'
+  if (typeof window === 'undefined') return 'dark'
 
   try {
     const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY)
     if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme
   } catch {
-    // Fall back to the system preference when storage is unavailable.
+    // Keep the dark default when storage is unavailable.
   }
 
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  return 'dark'
 }
 
 function Arrow() {
@@ -31,15 +32,25 @@ function Arrow() {
 }
 
 function SectionHeading({ index, title }: { index: string; title: string }) {
+  const reduceMotion = useReducedMotion()
+
   return (
-    <header className="section-heading">
+    <motion.header
+      className="section-heading"
+      initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.65 }}
+      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+    >
       <p>{index}</p>
       <h2>{title}</h2>
-    </header>
+    </motion.header>
   )
 }
 
 function ProjectVisual({ project }: { project: Project }) {
+  const reduceMotion = useReducedMotion()
+
   if (project.visual === 'nomad') {
     return <img src={nomadImage} alt="Nomad Connect interface" />
   }
@@ -47,12 +58,16 @@ function ProjectVisual({ project }: { project: Project }) {
   if (project.visual === 'dashboard') {
     return (
       <div className="data-visual" aria-label="Abstract production quality chart">
-        <span style={{ height: '32%' }} />
-        <span style={{ height: '52%' }} />
-        <span style={{ height: '43%' }} />
-        <span style={{ height: '72%' }} />
-        <span style={{ height: '61%' }} />
-        <span style={{ height: '88%' }} />
+        {['32%', '52%', '43%', '72%', '61%', '88%'].map((height, index) => (
+          <motion.span
+            key={height}
+            style={{ height, transformOrigin: 'bottom' }}
+            initial={reduceMotion ? false : { scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true, amount: 0.8 }}
+            transition={{ duration: 0.5, delay: index * 0.055, ease: [0.22, 1, 0.36, 1] }}
+          />
+        ))}
       </div>
     )
   }
@@ -66,13 +81,25 @@ function ProjectVisual({ project }: { project: Project }) {
 }
 
 function ProjectRow({ project, index }: { project: Project; index: number }) {
+  const reduceMotion = useReducedMotion()
+
   return (
-    <article className="project-row">
+    <motion.article
+      className="project-row"
+      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.6, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
+    >
       <p className="project-number">0{index + 1}</p>
 
-      <div className="project-media">
+      <motion.div
+        className="project-media"
+        whileHover={reduceMotion ? undefined : { y: -5, rotate: index % 2 === 0 ? -0.4 : 0.4 }}
+        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+      >
         <ProjectVisual project={project} />
-      </div>
+      </motion.div>
 
       <div className="project-copy">
         <h3>{project.title}</h3>
@@ -94,12 +121,19 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
           </div>
         )}
       </div>
-    </article>
+    </motion.article>
   )
 }
 
 function App() {
   const [theme, setTheme] = useState<Theme>(getInitialTheme)
+  const reduceMotion = useReducedMotion()
+  const { scrollYProgress } = useScroll()
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 28,
+    mass: 0.18,
+  })
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
@@ -123,15 +157,24 @@ function App() {
 
   return (
     <div className="site-shell">
-      <button
+      <motion.div
+        className="scroll-progress"
+        style={{ scaleX: reduceMotion ? scrollYProgress : smoothProgress }}
+        aria-hidden="true"
+      />
+
+      <motion.button
         type="button"
         className="theme-toggle"
         onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
         aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
         title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+        whileHover={reduceMotion ? undefined : { y: -1, scale: 1.03 }}
+        whileTap={reduceMotion ? undefined : { scale: 0.9 }}
       >
-        <span aria-hidden="true">{theme === 'dark' ? '○' : '●'}</span>
-      </button>
+        <span className="theme-toggle-icon" aria-hidden="true">{theme === 'dark' ? '☾' : '☼'}</span>
+        <span className="theme-toggle-label">{theme === 'dark' ? 'Dark' : 'Light'}</span>
+      </motion.button>
 
       <main id="top">
         <section className="hero" aria-labelledby="hero-title">
@@ -143,11 +186,23 @@ function App() {
           </div>
 
           <div className="hero-followup">
-            <p className="hero-statement">
+            <motion.p
+              className="hero-statement"
+              initial={reduceMotion ? false : { opacity: 0, y: 26 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.65 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            >
               I’m Ambiya Dimas Galystan, a full-stack developer in Paris moving deeper into Data
               Engineering &amp; AI.
-            </p>
-            <div className="hero-bottom">
+            </motion.p>
+            <motion.div
+              className="hero-bottom"
+              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.7 }}
+              transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+            >
               <p>
                 Currently at GEODIS and starting EFREI’s Master’s in Data Engineering &amp; AI in
                 September 2026.
@@ -155,7 +210,7 @@ function App() {
               <a className="availability" href={`mailto:${EMAIL}`}>
                 <span aria-hidden="true" /> Available for a 12-month apprenticeship
               </a>
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -170,11 +225,21 @@ function App() {
 
         <section className="section about-section" id="about">
           <SectionHeading index="02" title="About" />
-          <div className="about-grid">
-            <figure className="portrait">
+          <motion.div
+            className="about-grid"
+            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.22 }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <motion.figure
+              className="portrait"
+              whileHover={reduceMotion ? undefined : { y: -5, rotate: -0.35 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            >
               <img src={portraitImage} alt="Ambiya Dimas Galystan" />
               <figcaption>Paris, France · 2026</figcaption>
-            </figure>
+            </motion.figure>
             <div className="about-copy">
               <p className="about-lede">
                 I work between data, software, and the people who use both.
@@ -189,12 +254,18 @@ function App() {
                 <div><dt>Location</dt><dd>Paris, France</dd></div>
               </dl>
             </div>
-          </div>
+          </motion.div>
         </section>
 
         <section className="section" id="experience">
           <SectionHeading index="03" title="Experience" />
-          <article className="experience">
+          <motion.article
+            className="experience"
+            initial={reduceMotion ? false : { opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
             <header>
               <div>
                 <h3>{experience.title}</h3>
@@ -205,17 +276,23 @@ function App() {
             <ul>
               {experienceHighlights.map((point) => <li key={point}>{point}</li>)}
             </ul>
-          </article>
+          </motion.article>
         </section>
 
         <section className="section" id="capabilities">
           <SectionHeading index="04" title="Capabilities" />
           <div className="capability-list">
-            {skillGroups.map((group) => (
-              <article key={group.title}>
+            {skillGroups.map((group, index) => (
+              <motion.article
+                key={group.title}
+                initial={reduceMotion ? false : { opacity: 0, x: -14 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.8 }}
+                transition={{ duration: 0.45, delay: index * 0.035, ease: [0.22, 1, 0.36, 1] }}
+              >
                 <h3>{group.title}</h3>
                 <p>{group.items.join(', ')}</p>
-              </article>
+              </motion.article>
             ))}
           </div>
         </section>
@@ -223,21 +300,34 @@ function App() {
         <section className="section" id="education">
           <SectionHeading index="05" title="Education" />
           <div className="education-list">
-            {schoolHistory.map((school) => (
-              <article key={school.institution}>
+            {schoolHistory.map((school, index) => (
+              <motion.article
+                key={school.institution}
+                initial={reduceMotion ? false : { opacity: 0, x: 14 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.8 }}
+                transition={{ duration: 0.45, delay: index * 0.045, ease: [0.22, 1, 0.36, 1] }}
+              >
                 <div>
                   <h3>{school.degree}</h3>
                   <p>{school.institution}</p>
                 </div>
                 <p>{school.period}</p>
-              </article>
+              </motion.article>
             ))}
           </div>
         </section>
 
         <section className="contact" id="contact">
           <p className="eyebrow">Have a role or a project in mind?</p>
-          <h2>Let’s talk.</h2>
+          <motion.h2
+            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.7 }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+          >
+            Let’s talk.
+          </motion.h2>
           <a href={`mailto:${EMAIL}`}>{EMAIL} <Arrow /></a>
         </section>
       </main>
