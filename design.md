@@ -95,7 +95,7 @@ Project visuals use one muted coral (`#C96D49`) and one cobalt (`#4149D8`) as co
 ### Projects
 
 - Each project receives a compact full-width horizontal directory row.
-- The visual occupies four columns; all project information forms one cohesive eight-column content area on desktop.
+- Each project uses a compact fixed-size thumbnail beside one cohesive information column.
 - Outcomes use a compact two-column list with aligned separators instead of a stretched third column.
 - Technology metadata and project actions share a restrained footer row.
 - Every row follows the same reading direction to keep scanning calm and predictable.
@@ -119,7 +119,8 @@ Project visuals use one muted coral (`#C96D49`) and one cobalt (`#4149D8`) as co
 ## Interaction and accessibility
 
 - Semantic headings, lists, figures, links, and sections are retained.
-- System light/dark preference is respected automatically.
+- System light/dark preference is respected initially, with a small fixed top-right toggle for manual control.
+- The selected theme is remembered locally without adding a header or navigation menu.
 - Hover motion is limited to a 1.5% project-media scale.
 - `prefers-reduced-motion` removes animation and smooth scrolling.
 - Every image has meaningful alternative text.
