@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from 'framer-motion'
 import { experienceTimeline } from './data/experience'
 import { projects, type Project } from './data/projects'
 import { schoolHistory } from './data/school'
@@ -80,48 +80,99 @@ function ProjectVisual({ project }: { project: Project }) {
   )
 }
 
-function ProjectRow({ project, index }: { project: Project; index: number }) {
+function ProjectShowcase() {
+  const [activeIndex, setActiveIndex] = useState(0)
   const reduceMotion = useReducedMotion()
+  const activeProject = projects[activeIndex]
 
   return (
-    <motion.article
-      className="project-row"
+    <motion.div
+      className="project-showcase"
       initial={reduceMotion ? false : { opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 0.6, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
     >
-      <p className="project-number">0{index + 1}</p>
-
-      <motion.div
-        className="project-media"
-        whileHover={reduceMotion ? undefined : { y: -5, rotate: index % 2 === 0 ? -0.4 : 0.4 }}
-        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <ProjectVisual project={project} />
-      </motion.div>
-
-      <div className="project-copy">
-        <h3>{project.title}</h3>
-        <p className="project-description">{project.description}</p>
-        <p className="project-tags">{project.tags.slice(0, 5).join(' · ')}</p>
-
-        {(project.githubUrl || project.presentation) && (
-          <div className="project-links">
-            {project.githubUrl && (
-              <a href={project.githubUrl} target="_blank" rel="noreferrer">
-                GitHub <Arrow />
-              </a>
-            )}
-            {project.presentation && (
-              <a href={project.presentation.url} download={project.presentation.fileName}>
-                Presentation <span aria-hidden="true">↓</span>
-              </a>
-            )}
-          </div>
-        )}
+      <div className="project-preview">
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={activeProject.title}
+            className="project-preview-visual"
+            initial={reduceMotion ? false : { opacity: 0, scale: 0.985 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={reduceMotion ? undefined : { opacity: 0, scale: 1.01 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <ProjectVisual project={activeProject} />
+          </motion.div>
+        </AnimatePresence>
+        <div className="project-preview-caption">
+          <p>Selected case study</p>
+          <p>0{activeIndex + 1} / 0{projects.length}</p>
+        </div>
       </div>
-    </motion.article>
+
+      <div className="project-index">
+        {projects.map((project, index) => {
+          const isActive = index === activeIndex
+          const detailId = `project-detail-${index}`
+
+          return (
+            <article
+              className={`project-entry${isActive ? ' is-active' : ''}`}
+              key={project.title}
+              onMouseEnter={() => setActiveIndex(index)}
+              onFocusCapture={() => setActiveIndex(index)}
+            >
+              <button
+                type="button"
+                className="project-trigger"
+                aria-expanded={isActive}
+                aria-controls={detailId}
+                onClick={() => setActiveIndex(index)}
+              >
+                <span className="project-number">0{index + 1}</span>
+                <span className="project-title">{project.title}</span>
+                <span className="project-marker" aria-hidden="true" />
+              </button>
+
+              <AnimatePresence initial={false}>
+                {isActive && (
+                  <motion.div
+                    id={detailId}
+                    className="project-detail"
+                    initial={reduceMotion ? false : { height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={reduceMotion ? undefined : { height: 0, opacity: 0 }}
+                    transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <div className="project-detail-inner">
+                      <p className="project-description">{project.description}</p>
+                      <p className="project-tags">{project.tags.slice(0, 5).join(' · ')}</p>
+
+                      {(project.githubUrl || project.presentation) && (
+                        <div className="project-links">
+                          {project.githubUrl && (
+                            <a href={project.githubUrl} target="_blank" rel="noreferrer">
+                              View on GitHub <Arrow />
+                            </a>
+                          )}
+                          {project.presentation && (
+                            <a href={project.presentation.url} download={project.presentation.fileName}>
+                              Presentation <span aria-hidden="true">↓</span>
+                            </a>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </article>
+          )
+        })}
+      </div>
+    </motion.div>
   )
 }
 
@@ -216,11 +267,7 @@ function App() {
 
         <section className="section" id="work">
           <SectionHeading index="01" title="Selected work" />
-          <div className="project-list">
-            {projects.map((project, index) => (
-              <ProjectRow project={project} index={index} key={project.title} />
-            ))}
-          </div>
+          <ProjectShowcase />
         </section>
 
         <section className="section about-section" id="about">

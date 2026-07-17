@@ -16,20 +16,6 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: 'Production Quality Dashboard — Defect Analysis and Prediction',
-    description:
-      'A data pipeline and interactive dashboard for analysing production quality and estimating defect risk.',
-    points: [
-      'Built a Python pipeline to clean, transform, and load more than 2,000 production records.',
-      'Created quality indicators and analysed the factors associated with defects.',
-      'Compared classification models to estimate defect risk.',
-      'Developed an interactive dashboard for non-technical users.',
-    ],
-    tags: ['Python', 'Pandas', 'Scikit-learn', 'Plotly', 'Streamlit', 'Jupyter Notebook'],
-    githubUrl: 'https://github.com/Ambiya12/Production-quality-defect-prediction',
-    visual: 'dashboard',
-  },
-  {
     title: 'Evo-Botics — Autonomous Reception Robot',
     description:
       'An autonomous front-desk robot for business centres and coworking spaces that welcomes visitors, validates secure QR-code reservations, and guides them to meeting rooms.',
@@ -46,6 +32,20 @@ export const projects: Project[] = [
       fileName: 'Ambiya-Galystan-Evo-Botics-Presentation.pptx',
     },
     visual: 'robot',
+  },
+  {
+    title: 'Production Quality Dashboard — Defect Analysis and Prediction',
+    description:
+      'A data pipeline and interactive dashboard for analysing production quality and estimating defect risk.',
+    points: [
+      'Built a Python pipeline to clean, transform, and load more than 2,000 production records.',
+      'Created quality indicators and analysed the factors associated with defects.',
+      'Compared classification models to estimate defect risk.',
+      'Developed an interactive dashboard for non-technical users.',
+    ],
+    tags: ['Python', 'Pandas', 'Scikit-learn', 'Plotly', 'Streamlit', 'Jupyter Notebook'],
+    githubUrl: 'https://github.com/Ambiya12/Production-quality-defect-prediction',
+    visual: 'dashboard',
   },
   {
     title: 'Nomad Connect',
