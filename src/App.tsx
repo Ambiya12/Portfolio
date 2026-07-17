@@ -172,8 +172,8 @@ function App() {
         whileHover={reduceMotion ? undefined : { y: -1, scale: 1.03 }}
         whileTap={reduceMotion ? undefined : { scale: 0.9 }}
       >
-        <span className="theme-toggle-icon" aria-hidden="true">{theme === 'dark' ? '☾' : '☼'}</span>
-        <span className="theme-toggle-label">{theme === 'dark' ? 'Dark' : 'Light'}</span>
+        <span className="theme-toggle-icon" aria-hidden="true">{theme === 'dark' ? '☀' : '☾'}</span>
+        <span className="theme-toggle-label">{theme === 'dark' ? 'Light' : 'Dark'}</span>
       </motion.button>
 
       <main id="top">
