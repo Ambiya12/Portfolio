@@ -232,7 +232,8 @@ function App() {
           <div className="hero-stage">
             <p className="eyebrow">Data engineering · AI · Full-stack development</p>
             <h1 id="hero-title">
-              I turn fragmented data into reliable systems and build the tools people need to use them.
+              Master’s student in Data Engineering &amp; AI, bringing a full-stack mindset to
+              reliable systems—from pipeline to product.
             </h1>
           </div>
 
