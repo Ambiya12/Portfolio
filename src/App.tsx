@@ -8,8 +8,10 @@ import galystRaaImage from './assets/GalystRAA.jpg'
 import nomadImage from './assets/nomad.jpg'
 import portraitImage from './assets/portrait.jpg'
 import robotImage from './assets/Robot.jpg'
+import cvPdf from './assets/Ambiya_Dimas_Galystan_CV_Data_Engineer.pdf'
 
 const EMAIL = 'ambiyadms@gmail.com'
+const CV_FILE_NAME = 'Ambiya_Dimas_Galystan_CV_Data_Engineer.pdf'
 const THEME_STORAGE_KEY = 'portfolio-theme'
 
 type Theme = 'light' | 'dark'
@@ -259,9 +261,24 @@ function App() {
                 Currently at GEODIS and starting EFREI’s Master’s in Data Engineering &amp; AI in
                 September 2026.
               </p>
-              <a className="availability" href={`mailto:${EMAIL}`}>
-                <span aria-hidden="true" /> Available for a 12-month apprenticeship
-              </a>
+              <div className="hero-actions" aria-label="Availability and CV download">
+                <a className="availability" href={`mailto:${EMAIL}`}>
+                  <span aria-hidden="true" /> Available for a 12-month apprenticeship
+                </a>
+                <motion.a
+                  className="cv-download"
+                  href={cvPdf}
+                  download={CV_FILE_NAME}
+                  whileHover={reduceMotion ? undefined : { y: -2 }}
+                  whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+                >
+                  <span className="cv-download-icon" aria-hidden="true">↓</span>
+                  <span>
+                    <strong>Download CV</strong>
+                    <small>Data Engineer PDF · 260 KB</small>
+                  </span>
+                </motion.a>
+              </div>
             </motion.div>
           </div>
         </section>
@@ -376,7 +393,12 @@ function App() {
           >
             Let’s talk.
           </motion.h2>
-          <a href={`mailto:${EMAIL}`}>{EMAIL} <Arrow /></a>
+          <div className="contact-actions">
+            <a href={`mailto:${EMAIL}`}>{EMAIL} <Arrow /></a>
+            <a className="contact-cv-download" href={cvPdf} download={CV_FILE_NAME}>
+              Download CV <span aria-hidden="true">↓</span>
+            </a>
+          </div>
         </section>
       </main>
 

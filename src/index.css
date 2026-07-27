@@ -114,13 +114,15 @@ footer {
 }
 
 .project-links a,
-.contact > a,
+.cv-download,
+.contact-cv-download,
+.contact-actions a,
 footer a {
-  transition: opacity 160ms ease, color 160ms ease;
+  transition: opacity 160ms ease, color 160ms ease, border-color 160ms ease, background-color 160ms ease;
 }
 
 .project-links a:hover,
-.contact > a:hover,
+.contact-actions a:hover,
 footer a:hover {
   opacity: 0.55;
 }
@@ -231,7 +233,7 @@ a:focus-visible {
 
 .hero-bottom {
   display: grid;
-  grid-template-columns: minmax(0, 35rem) auto;
+  grid-template-columns: minmax(0, 35rem) minmax(17rem, auto);
   align-items: end;
   justify-content: space-between;
   gap: 2rem;
@@ -240,12 +242,88 @@ a:focus-visible {
   font-size: clamp(0.9rem, 0.87rem + 0.1vw, 0.98rem);
 }
 
+.hero-actions {
+  display: grid;
+  justify-items: end;
+  gap: 1rem;
+}
+
 .availability {
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
   color: var(--ink);
   white-space: nowrap;
+}
+
+.cv-download {
+  position: relative;
+  display: inline-flex;
+  width: min(100%, 21rem);
+  align-items: center;
+  gap: 0.85rem;
+  overflow: hidden;
+  padding: 0.95rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 64%, var(--line));
+  border-radius: 0.45rem;
+  color: var(--bg);
+  background: var(--accent);
+  box-shadow: 0 1rem 2.5rem color-mix(in srgb, var(--accent) 17%, transparent);
+  font-size: 0.9rem;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.cv-download::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.24) 45%, transparent 72%);
+  opacity: 0;
+  transform: translateX(-45%);
+  transition: opacity 180ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.cv-download:hover {
+  border-color: var(--ink);
+  background: color-mix(in srgb, var(--accent) 82%, var(--ink));
+}
+
+.cv-download:hover::after {
+  opacity: 1;
+  transform: translateX(45%);
+}
+
+.cv-download-icon {
+  display: grid;
+  width: 2.15rem;
+  height: 2.15rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--bg) 38%, transparent);
+  border-radius: 50%;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.cv-download span:last-child {
+  display: grid;
+  gap: 0.08rem;
+  min-width: 0;
+}
+
+.cv-download strong {
+  font-weight: 600;
+  line-height: 1.05;
+}
+
+.cv-download small {
+  color: color-mix(in srgb, var(--bg) 68%, transparent);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
 .availability span {
@@ -695,12 +773,34 @@ a:hover .arrow {
   letter-spacing: -0.05em;
 }
 
-.contact > a {
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.7rem 1.25rem;
+}
+
+.contact-actions a {
   width: fit-content;
   padding-bottom: 0.25rem;
   border-bottom: 1px solid var(--line-strong);
   font-size: 0.86rem;
   white-space: nowrap;
+}
+
+.contact-actions .contact-cv-download {
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--bg);
+  background: var(--accent);
+  font-weight: 500;
+}
+
+.contact-actions .contact-cv-download:hover {
+  opacity: 1;
+  border-color: var(--ink);
+  background: color-mix(in srgb, var(--accent) 82%, var(--ink));
 }
 
 footer {
@@ -743,7 +843,16 @@ footer div {
     grid-template-columns: 1fr;
   }
 
+  .hero-actions {
+    justify-items: start;
+  }
+
   .availability {
+    white-space: normal;
+  }
+
+  .cv-download {
+    width: 100%;
     white-space: normal;
   }
 
@@ -775,6 +884,10 @@ footer div {
 
   .contact .eyebrow {
     grid-column: 1 / -1;
+  }
+
+  .contact-actions {
+    justify-content: flex-start;
   }
 }
 
