@@ -257,14 +257,16 @@ function App() {
               viewport={{ once: true, amount: 0.7 }}
               transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
             >
-              <p>
-                Currently at GEODIS and starting EFREI’s Master’s in Data Engineering &amp; AI in
-                September 2026.
-              </p>
-              <div className="hero-actions" aria-label="Availability and CV download">
+              <div className="hero-status">
+                <p>
+                  Currently at GEODIS and starting EFREI’s Master’s in Data Engineering &amp; AI in
+                  September 2026.
+                </p>
                 <a className="availability" href={`mailto:${EMAIL}`}>
                   <span aria-hidden="true" /> Available for a 12-month apprenticeship
                 </a>
+              </div>
+              <div className="hero-actions" aria-label="CV download">
                 <motion.a
                   className="cv-download"
                   href={cvPdf}
