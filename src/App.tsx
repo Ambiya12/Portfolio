@@ -266,21 +266,6 @@ function App() {
                   <span aria-hidden="true" /> Available for a 12-month apprenticeship
                 </a>
               </div>
-              <div className="hero-actions" aria-label="CV download">
-                <motion.a
-                  className="cv-download"
-                  href={cvPdf}
-                  download={CV_FILE_NAME}
-                  whileHover={reduceMotion ? undefined : { y: -2 }}
-                  whileTap={reduceMotion ? undefined : { scale: 0.98 }}
-                >
-                  <span className="cv-download-icon" aria-hidden="true">↓</span>
-                  <span>
-                    <strong>Download CV</strong>
-                    <small>Data Engineer PDF · 260 KB</small>
-                  </span>
-                </motion.a>
-              </div>
             </motion.div>
           </div>
         </section>
