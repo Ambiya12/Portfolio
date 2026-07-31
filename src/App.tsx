@@ -8,10 +8,8 @@ import galystRaaImage from './assets/GalystRAA.jpg'
 import nomadImage from './assets/nomad.jpg'
 import portraitImage from './assets/portrait.jpg'
 import robotImage from './assets/Robot.jpg'
-import cvPdf from './assets/Ambiya_Dimas_Galystan_CV_Data_Engineer.pdf'
 
 const EMAIL = 'ambiyadms@gmail.com'
-const CV_FILE_NAME = 'Ambiya_Dimas_Galystan_CV_Data_Engineer.pdf'
 const THEME_STORAGE_KEY = 'portfolio-theme'
 
 type Theme = 'light' | 'dark'
@@ -380,12 +378,7 @@ function App() {
           >
             Let’s talk.
           </motion.h2>
-          <div className="contact-actions">
-            <a href={`mailto:${EMAIL}`}>{EMAIL} <Arrow /></a>
-            <a className="contact-cv-download" href={cvPdf} download={CV_FILE_NAME}>
-              Download CV <span aria-hidden="true">↓</span>
-            </a>
-          </div>
+          <a href={`mailto:${EMAIL}`}>{EMAIL} <Arrow /></a>
         </section>
       </main>
 

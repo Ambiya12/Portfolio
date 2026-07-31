@@ -114,14 +114,13 @@ footer {
 }
 
 .project-links a,
-.contact-cv-download,
-.contact-actions a,
+.contact > a,
 footer a {
-  transition: opacity 160ms ease, color 160ms ease, border-color 160ms ease, background-color 160ms ease;
+  transition: opacity 160ms ease, color 160ms ease;
 }
 
 .project-links a:hover,
-.contact-actions a:hover,
+.contact > a:hover,
 footer a:hover {
   opacity: 0.55;
 }
@@ -697,34 +696,12 @@ a:hover .arrow {
   letter-spacing: -0.05em;
 }
 
-.contact-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 0.7rem 1.25rem;
-}
-
-.contact-actions a {
+.contact > a {
   width: fit-content;
   padding-bottom: 0.25rem;
   border-bottom: 1px solid var(--line-strong);
   font-size: 0.86rem;
   white-space: nowrap;
-}
-
-.contact-actions .contact-cv-download {
-  padding: 0.45rem 0.7rem;
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  color: var(--bg);
-  background: var(--accent);
-  font-weight: 500;
-}
-
-.contact-actions .contact-cv-download:hover {
-  opacity: 1;
-  border-color: var(--ink);
-  background: color-mix(in srgb, var(--accent) 82%, var(--ink));
 }
 
 footer {
@@ -800,9 +777,6 @@ footer div {
     grid-column: 1 / -1;
   }
 
-  .contact-actions {
-    justify-content: flex-start;
-  }
 }
 
 @media (max-width: 520px) {
